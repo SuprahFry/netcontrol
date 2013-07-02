@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Console</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 2.0, user-scalable = 1">
+		<link rel="stylesheet" type="text/css" href="style.css" media="screen and (min-device-width: 481px)" />
+		<link rel="stylesheet" type="text/css" href="mobile.css" media="handheld" />
+		<link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 480px)" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="jquery.ba-hashchange.min.js"></script>
+		<script type="text/javascript">
+			function receiveMessage(command)
+			{
+				$.ajax({
+					type: 'GET',
+					url: 'init.php',
+					data: 'command=' + command,
+					async: true,
+					cache: false,
+					timeout: 30000,
+					success: function(data)
+					{
+						var json = eval('(' + data + ')');
+						
+						if (typeof(json) != "undefined" && json !== null)
+						{
+							if (json['response'] != '')
+							{
+								pushMessage(json['response']);
+							}
+							else
+							{
+								resetInput();
+							}
+						}
+						else
+						{
+							pushMessage('Unknown terminal server response.');
+						}
+					},
+					error: function(request, status, errorThrown)
+					{
+						if (!errorThrown)
+						{
+							pushMessage(status);
+						}
+						else
+						{
+							if (status == 'timeout')
+							{
+								pushMessage('Terminal timeout while sending command.');
+							}
+							else
+							{
+								pushMessage(status + ': ' + errorThrown);
+							}
+						}
+					}
+				});
+			}
+			
+			function pushMessage(message)
+			{
+				$('#console-content table').append('<tr><td>&nbsp;</td><td class="pre">' + message + '</td></tr>');
+				resetInput();
+			}
+			
+			function resetInput()
+			{
+				$('#console-content table').append('<tr><td>></td><td><input type="text" class="command" value="" /></td></tr>');
+				$('.command').focus();
+				$('.command').on('keydown', commandKeyDown);
+			}
+			
+			function resetConsole()
+			{
+				$('#console-content table').html('');
+				resetInput();
+				commandHistory = new Array();
+			}
+			
+			var commandHistory = new Array();
+			var commandIndex = 0;
+			
+			var commandKeyDown = function(e)
+			{
+				var code = e.keyCode || e.which;
+				
+				if (code == 13)
+				{
+					var command = $('.command').val();
+					$('input.command').replaceWith($('<span/>').text(command));
+					
+					switch (command)
+					{
+						case 'clear':
+							resetConsole();
+							break;
+						default:
+							receiveMessage(command);
+							break;
+					}
+					
+					if (command != '' && commandHistory[commandHistory.length - 1] != command)
+					{
+						commandHistory.push(command);
+					}
+					
+					commandIndex = commandHistory.length;
+				}
+				else if (code == 38)
+				{
+					if (commandIndex > 0)
+					{
+						commandIndex--;
+					}
+					
+					$('.command').val(commandHistory[commandIndex]);
+				}
+				else if (code == 40)
+				{
+					if (commandIndex < commandHistory.length)
+					{
+						commandIndex++;
+					}
+					
+					$('.command').val(commandHistory[commandIndex]);
+				}
+			}
+			
+			$(document).ready(function()
+			{
+				var binder = function(e)
+				{
+					$('.command').focus();
+				};
+				
+				$(window).hashchange(function()
+				{
+					$('.command').val(location.hash.substr(1));
+				});
+				
+				$(window).hashchange();
+				$('.command').focus();
+				$(document).bind('click', binder);
+				$('#console').bind('click', binder);
+				$('#console-content').bind('click', binder);
+				$('.command').on('keydown', commandKeyDown);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="console">
+			<div id="console-title">
+				<img src="images/application-terminal-icon.png" /> Terminal
+			</div>
+			<div id="console-content">
+				<table>
+					<tr><td>></td><td><input type="text" class="command" value="" /></td></tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,160 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	background: none center top repeat #4d8faa;
+	height: 100%; 
+}
+
+body, td, input, select, textarea
+{
+	font-family: Lucida Console, Courier New, monospace;
+	font-size: 11px;
+	color: #c0c0c0;
+}
+
+table, tr, td
+{
+	border-spacing: 0;
+	margin: 0;
+	padding: 0;
+}
+
+a img, img
+{
+	border: none;
+}
+
+a
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+img
+{
+	vertical-align: middle;
+}
+
+input
+{
+	background-color: #060c0e;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	height: 11px;
+	width: 100%;
+}
+
+input:focus
+{
+	outline: 0;
+}
+
+#console
+{
+	margin: 0 auto;
+	position: absolute;
+	text-align: left;
+	padding: 0;
+	width: 640px;
+	margin-top: -172px;
+	top: 50%;
+	left: 50%;
+	margin-left: -320px;
+	padding: 0 7px 7px 7px;
+	border: 1px solid #454545;
+	border-radius: 7px 7px 3px 3px;
+	background: rgba(0, 0, 0, 0.15);
+	box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3), inset 0px 7px 10px 0px rgba(255, 255, 255, 0.1), inset 0 13px rgba(255, 255, 255, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
+	-o-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3), inset 0px 7px 10px 0px rgba(255, 255, 255, 0.1), inset 0 13px rgba(255, 255, 255, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3), inset 0px 7px 10px 0px rgba(255, 255, 255, 0.1), inset 0 13px rgba(255, 255, 255, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3), inset 0px 7px 10px 0px rgba(255, 255, 255, 0.1), inset 0 13px rgba(255, 255, 255, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
+	-ms-box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.3), inset 0px 7px 10px 0px rgba(255, 255, 255, 0.1), inset 0 13px rgba(255, 255, 255, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0px 0px 7px 0px rgba(0, 0, 0, 0.3);
+}
+
+#console-title
+{
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	font-size: 12px;
+	color: #000000;
+	height: 23px;
+	line-height: 23px;
+	padding-left: 1px;
+	display: inline-block;
+	text-shadow: 0px 0px 7px #ffffff;
+	filter: dropshadow(color=#ffffff, offx=0, offy=0);
+}
+
+#console-title img
+{
+	margin-bottom: 3px;
+}
+
+#console-content
+{
+	padding: 2px;
+	background-color: #060c0e;
+	border-radius: 1px;
+	border: 1px solid #a0a0a0;
+	height: 308px;
+	overflow: auto;
+}
+
+#console-content table
+{
+	width: 100%;
+}
+
+#console-content table tr td
+{
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 628px;
+	vertical-align: middle;
+}
+
+#console-content tr td:first-child
+{
+	width: 6px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.cursor-on:after
+{
+	content: "_";
+}
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+.clear2
+{
+	clear: both;
+	line-height: 0;
+	height: 0px;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.gradient
+{
+	filter: none;
+}
