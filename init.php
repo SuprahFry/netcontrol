@@ -32,6 +32,12 @@ if (isset($_GET['command']) && $terminal->getCommand() != '' && $settings['termi
 	else
 	{
 		$terminal->writeLine('Command not found.');
+		$terminal->writeLine('Available commands:');
+		
+		foreach ($settings['terminal']['commands'] as $key => $value)
+		{
+			$terminal->writeLine($key);
+		}
 	}
 }
 
